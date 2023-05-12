@@ -23,5 +23,13 @@ namespace Sample.WebAPI.Controllers
             var query = new LogQuery();
             return Ok(await Mediator.Send(query));
         }
+
+        [HttpGet]
+        [Route("scan")]
+        public async Task<ActionResult<Scan>> GetScan()
+        {
+            var query = new ScanQuery();
+            return Ok(await Mediator.Send(query));
+        }
     }
 }
