@@ -1,5 +1,4 @@
-using AutoMapper;
-using Sample.Application.Common.Mapping;
+using Sample.Application;
 
 namespace Sample.WebAPI
 {
@@ -11,10 +10,8 @@ namespace Sample.WebAPI
 
             builder.Services.AddControllers();
 
-            builder.Services.AddScoped(provider => new MapperConfiguration(configure =>
-            {
-                configure.AddProfile(new AssemblyMappingProfile(typeof(AssemblyMappingProfile).Assembly));
-            }).CreateMapper());
+            builder.Services.AddAutoMapper();
+            builder.Services.AddMediatR();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
