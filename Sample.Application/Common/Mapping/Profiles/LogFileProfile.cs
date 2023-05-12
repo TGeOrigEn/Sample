@@ -24,7 +24,7 @@ namespace Sample.Application.Common.Mapping.Profiles
             profile.CreateMap<LogFile, ScanFileWithOnlyFileNameDTO>()
                 .ForMember(destination => destination.FileName, options => options.MapFrom(source => source.FileName));
 
-            profile.CreateMap<LogFile, ScanFileWithOnlyErrorsDTO>()
+            profile.CreateMap<LogFile, ScanFileWithOnlyNameAndErrorsDTO>()
                 .ForMember(destination => destination.FileName, options => options.MapFrom(source => source.FileName))
                 .ForMember(destination => destination.Errors, options => options.MapFrom(source => source.Errors.Select(error => error.Description)));
         }

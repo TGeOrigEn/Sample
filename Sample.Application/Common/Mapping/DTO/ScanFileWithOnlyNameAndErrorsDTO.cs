@@ -1,6 +1,6 @@
 ﻿namespace Sample.Application.Common.Mapping.DTO
 {
-    public class ScanFileWithOnlyErrorsDTO
+    public class ScanFileWithOnlyNameAndErrorsDTO
     {
         public string FileName { get; set; } = null!;
 
