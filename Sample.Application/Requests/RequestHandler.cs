@@ -81,4 +81,11 @@ namespace Sample.Application.Requests
 
         public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
     }
+
+    public abstract class RequestHandler<TRequest> : RequestHandler, IRequestHandler<TRequest> where TRequest : IRequest
+    {
+        protected RequestHandler(IMapper mapper) : base(mapper) { }
+
+        public abstract Task Handle(TRequest request, CancellationToken cancellationToken);
+    }
 }

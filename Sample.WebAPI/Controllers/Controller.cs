@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sample.Application.Common.Mapping.DTO;
 using Sample.Application.Entities;
+using Sample.Application.Requests.Commands;
 using Sample.Application.Requests.Queries;
 
 namespace Sample.WebAPI.Controllers
@@ -75,6 +76,26 @@ namespace Sample.WebAPI.Controllers
         {
             var query = new CheckResultQuery();
             return Ok(await Mediator.Send(query));
+        }
+
+        [HttpPost]
+        [Route("newErrors")]
+        public async Task<ActionResult> PostLog([FromBody] Log log)
+        {
+            var query = new CreateLogCommand()
+            {
+                Log = log
+            };
+
+            try
+            {
+                await Mediator.Send(query);
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                return Problem(title: exception.GetType().Name, statusCode: 500, detail: exception.Message);
+            }
         }
     }
 }
