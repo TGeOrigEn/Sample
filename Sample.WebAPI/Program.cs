@@ -1,3 +1,6 @@
+using AutoMapper;
+using Sample.Application.Common.Mapping;
+
 namespace Sample.WebAPI
 {
     public class Program
@@ -6,16 +9,18 @@ namespace Sample.WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddScoped(provider => new MapperConfiguration(configure =>
+            {
+                configure.AddProfile(new AssemblyMappingProfile(typeof(AssemblyMappingProfile).Assembly));
+            }).CreateMapper());
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -23,9 +28,6 @@ namespace Sample.WebAPI
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
 
             app.MapControllers();
 
