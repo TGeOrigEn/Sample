@@ -9,13 +9,13 @@ namespace Sample.Application.Common.Mapping.Profiles
         public void Mapping(Profile profile)
         {
             profile.CreateMap<JObject, Error>()
-                .ForMember(destination => destination.Module, options => options.MapFrom(source => source["module"]!.ToObject<string>()))
                 .ForMember(destination => destination.Description, oprions => oprions.MapFrom(source => source["error"]!.ToObject<string>()))
+                .ForMember(destination => destination.Module, options => options.MapFrom(source => source["module"]!.ToObject<string>()))             
                 .ForMember(destination => destination.ECode, options => options.MapFrom(source => source["ecode"]!.ToObject<int>()));
 
             profile.CreateMap<JToken, Error>()
-                .ForMember(destination => destination.Module, options => options.MapFrom(source => source["module"]!.ToObject<string>()))
                 .ForMember(destination => destination.Description, oprions => oprions.MapFrom(source => source["error"]!.ToObject<string>()))
+                .ForMember(destination => destination.Module, options => options.MapFrom(source => source["module"]!.ToObject<string>()))      
                 .ForMember(destination => destination.ECode, options => options.MapFrom(source => source["ecode"]!.ToObject<int>()));
         }
     }
