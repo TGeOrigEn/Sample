@@ -52,5 +52,13 @@ namespace Sample.WebAPI.Controllers
             var query = new ScanFileWithOnlyFileNameAndErrorsQuery();
             return Ok(await Mediator.Send(query));
         }
+
+        [HttpGet]
+        [Route("errors/count")]
+        public async Task<ActionResult<int>> GetErrorCount()
+        {
+            var query = new ErrorCountQuery();
+            return Ok(await Mediator.Send(query));
+        }
     }
 }
