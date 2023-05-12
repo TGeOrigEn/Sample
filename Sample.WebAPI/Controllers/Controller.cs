@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Sample.Application.Common.Mapping.DTO;
 using Sample.Application.Entities;
 using Sample.Application.Requests.Queries;
 
@@ -29,6 +30,18 @@ namespace Sample.WebAPI.Controllers
         public async Task<ActionResult<Scan>> GetScan()
         {
             var query = new ScanQuery();
+            return Ok(await Mediator.Send(query));
+        }
+
+        [HttpGet]
+        [Route("filenames")]
+        public async Task<ActionResult<IEnumerable<ScanFileWithOnlyFileNameDTO>>> GetScanFilesWithOnlyFileNameByResult([FromQuery] bool correct)
+        {
+            var query = new ScanFilesWithOnlyFileNameQuery()
+            {
+                Correct = correct
+            };
+
             return Ok(await Mediator.Send(query));
         }
     }
