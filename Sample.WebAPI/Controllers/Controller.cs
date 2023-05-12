@@ -72,7 +72,7 @@ namespace Sample.WebAPI.Controllers
 
         [HttpGet]
         [Route("query/check")]
-        public async Task<ActionResult<CheckResultDTO>> GetCheck()
+        public async Task<ActionResult<CheckResultDTO>> GetCheckResult()
         {
             var query = new CheckResultQuery();
             return Ok(await Mediator.Send(query));
@@ -80,7 +80,7 @@ namespace Sample.WebAPI.Controllers
 
         [HttpPost]
         [Route("newErrors")]
-        public async Task<ActionResult> PostLog([FromBody] Log log)
+        public async Task<ActionResult> CreateLog([FromBody] Log log)
         {
             var query = new CreateLogCommand()
             {
