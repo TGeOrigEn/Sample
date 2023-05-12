@@ -1,9 +1,14 @@
-﻿namespace Sample.Application.Entities
+﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
+namespace Sample.Application.Entities
 {
     public class Scan
     {
         public DateTime ScanTime { get; set; }
 
+        [JsonPropertyName("db")]
+        [JsonProperty(PropertyName = "db")]
         public string DataBase { get; set; } = null!;
 
         public string Server { get; set; } = null!;

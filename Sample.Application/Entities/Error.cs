@@ -1,11 +1,18 @@
-﻿namespace Sample.Application.Entities
+﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
+namespace Sample.Application.Entities
 {
     public class Error
     {
         public string Module { get; set; } = null!;
 
+        [JsonPropertyName("ecode")]
+        [JsonProperty(PropertyName = "ecode")]
         public int ECode { get; set; }
 
+        [JsonPropertyName("error")]
+        [JsonProperty(PropertyName = "error")]
         public string Description { get; set; } = null!;
 
         public override bool Equals(object? obj) =>
