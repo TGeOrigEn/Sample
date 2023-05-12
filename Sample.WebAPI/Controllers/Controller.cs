@@ -68,5 +68,13 @@ namespace Sample.WebAPI.Controllers
             var query = new ScanFileWithOnlyFileNameAndErrorsByIndexQuery() { Index = index };
             return Ok(await Mediator.Send(query));
         }
+
+        [HttpGet]
+        [Route("query/check")]
+        public async Task<ActionResult<CheckResultDTO>> GetCheck()
+        {
+            var query = new CheckResultQuery();
+            return Ok(await Mediator.Send(query));
+        }
     }
 }
