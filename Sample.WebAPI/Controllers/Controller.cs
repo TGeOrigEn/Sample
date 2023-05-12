@@ -65,7 +65,7 @@ namespace Sample.WebAPI.Controllers
 
         [HttpGet]
         [Route("errors/{index}")]
-        public async Task<ActionResult<ScanFileWithOnlyFileNameAndErrorsDTO?>> GetScanByIndex(int index)
+        public async Task<ActionResult<ScanFileWithOnlyFileNameAndErrorsDTO?>> GetScanFileWithOnlyFileNameAndErrorsByIndex(int index)
         {
             var query = new ScanFileWithOnlyFileNameAndErrorsByIndexQuery() { Index = index };
             return Ok(await Mediator.Send(query));
@@ -101,7 +101,7 @@ namespace Sample.WebAPI.Controllers
 
         [HttpGet]
         [Route("service/serviceInfo")]
-        public async Task<ActionResult<ServiceInfoDTO>> GetInfo()
+        public async Task<ActionResult<ServiceInfoDTO>> GetServiceInfo()
         {
             var query = new ServiceInfoQuery()
             {
