@@ -35,13 +35,21 @@ namespace Sample.WebAPI.Controllers
 
         [HttpGet]
         [Route("filenames")]
-        public async Task<ActionResult<IEnumerable<ScanFileWithOnlyFileNameDTO>>> GetScanFilesWithOnlyFileNameByResult([FromQuery] bool correct)
+        public async Task<ActionResult<IEnumerable<ScanFileWithOnlyFileNameDTO>>> GetScanFilesWithOnlyFileName([FromQuery] bool correct)
         {
             var query = new ScanFilesWithOnlyFileNameQuery()
             {
                 Correct = correct
             };
 
+            return Ok(await Mediator.Send(query));
+        }
+
+        [HttpGet]
+        [Route("errors")]
+        public async Task<ActionResult<IEnumerable<ScanFileWithOnlyFileNameAndErrorsDTO>>> GetScanFilesWithOnlyFileNameAndErrors()
+        {
+            var query = new ScanFileWithOnlyFileNameAndErrorsQuery();
             return Ok(await Mediator.Send(query));
         }
     }
