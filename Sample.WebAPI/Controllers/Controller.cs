@@ -4,6 +4,7 @@ using Sample.Application.Common.Mapping.DTO;
 using Sample.Application.Entities;
 using Sample.Application.Requests.Commands;
 using Sample.Application.Requests.Queries;
+using System.Reflection;
 
 namespace Sample.WebAPI.Controllers
 {
@@ -96,6 +97,18 @@ namespace Sample.WebAPI.Controllers
             {
                 return Problem(title: exception.GetType().Name, statusCode: 500, detail: exception.Message);
             }
+        }
+
+        [HttpGet]
+        [Route("service/serviceInfo")]
+        public async Task<ActionResult<ServiceInfoDTO>> GetInfo()
+        {
+            var query = new ServiceInfoQuery()
+            {
+                AssemblyName = Assembly.GetExecutingAssembly().GetName()
+            };
+
+            return Ok(await Mediator.Send(query));
         }
     }
 }
