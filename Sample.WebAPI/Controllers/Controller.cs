@@ -49,7 +49,7 @@ namespace Sample.WebAPI.Controllers
         [Route("errors")]
         public async Task<ActionResult<IEnumerable<ScanFileWithOnlyFileNameAndErrorsDTO>>> GetScanFilesWithOnlyFileNameAndErrors()
         {
-            var query = new ScanFileWithOnlyFileNameAndErrorsQuery();
+            var query = new ScanFilesWithOnlyFileNameAndErrorsQuery();
             return Ok(await Mediator.Send(query));
         }
 

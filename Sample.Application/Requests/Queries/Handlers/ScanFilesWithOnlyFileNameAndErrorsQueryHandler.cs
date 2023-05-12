@@ -3,13 +3,13 @@ using Sample.Application.Common.Mapping.DTO;
 
 namespace Sample.Application.Requests.Queries.Handlers
 {
-    public class ScanFileWithOnlyFileNameAndErrorsQueryHandler : RequestHandler<ScanFileWithOnlyFileNameAndErrorsQuery,
+    public class ScanFilesWithOnlyFileNameAndErrorsQueryHandler : RequestHandler<ScanFilesWithOnlyFileNameAndErrorsQuery,
         IEnumerable<ScanFileWithOnlyFileNameAndErrorsDTO>>
     {
-        public ScanFileWithOnlyFileNameAndErrorsQueryHandler(IMapper mapper) : base(mapper) { }
+        public ScanFilesWithOnlyFileNameAndErrorsQueryHandler(IMapper mapper) : base(mapper) { }
 
         public override async Task<IEnumerable<ScanFileWithOnlyFileNameAndErrorsDTO>> Handle(
-            ScanFileWithOnlyFileNameAndErrorsQuery request,
+            ScanFilesWithOnlyFileNameAndErrorsQuery request,
             CancellationToken cancellationToken)
         {
             var files = (await GetLog(cancellationToken)).Files.Where(file => file.Result == false);
