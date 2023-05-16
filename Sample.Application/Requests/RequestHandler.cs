@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Sample.Application.Entities;
 using System.Globalization;
@@ -51,7 +50,9 @@ namespace Sample.Application.Requests
                 path = PathToData;
 
             var file = await File.ReadAllTextAsync(path, cancellationToken);
-            return mapper.Map<Log>(JObject.Parse(file));
+
+            return JsonConvert.DeserializeObject<Log>(file)
+                ?? throw new InvalidCastException($"Failed to convert file by path '{path}' to Log.");
         }
 
         protected static void SaveLog(Log log)
