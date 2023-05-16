@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Sample.Application.Entities;
 using System.Globalization;
 
@@ -53,26 +52,6 @@ namespace Sample.Application.Requests
 
             return JsonConvert.DeserializeObject<Log>(file)
                 ?? throw new InvalidCastException($"Failed to convert file by path '{path}' to Log.");
-        }
-
-        protected static void SaveLog(Log log)
-        {
-            var logName = Path.Combine(PathToLogs, $"{DateTime.UtcNow.ToString(DATE_TIME_FORMAT)}.json");
-
-            if (!Directory.Exists(PathToLogs))
-                Directory.CreateDirectory(PathToLogs);
-
-            using StreamWriter streamWriter = new(logName);
-
-            var settings = new JsonSerializerSettings()
-            {
-                ContractResolver = new DefaultContractResolver()
-                {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                }
-            };
-
-            JsonSerializer.CreateDefault(settings).Serialize(streamWriter, log);
         }
     }
 
